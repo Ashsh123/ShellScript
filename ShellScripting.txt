@@ -1,0 +1,138 @@
+Bash Scripting :- 
+
+Command Line Interface 
+To control the OS of a amachine we have two main mechanism.
+1. GUI - Graphical user interface.
+2. CLI - Command Line Interface.
+
+It becomes very easy to control your whole OS using GUI interfacing. But at a lot of situation where you will expected to control the whole OS using CLI interface. When can this happen ?
+Let's say we hosted our backend application on a AWS cloud server, now these server are present in a very remote location, now if we have to interact with this server, then we need to control the OS of this server from our machine. And here CLI will only help us as we won't be having any GUI to the server.
+
+In CLI Interface, we use software like item, terminal, CMD, Powershell, etc,. which gives us an interface to write some Commands that will be running in our OS.
+
+REPL Console:-
+
+REPL stands for Read, Eveluate, Print, Loop. 
+A REPL Console is a special type of console which understand a particular programming language and every time we run it, it will expect us to add one valid instruction to the console. it will then Eveluate it's output, print the output and then go back to the same where it is expecting an input from us.
+
+Language like Python, Ruby, JS all have their respective REPL consoles.
+Even, the terminal which we see in our OS are REPL consoles, wich understand bash Scripting language.
+
+What is Shell ?
+A sehll in the context of computing and OS like Linux, is and interface that allow you to access and interact services of your OS. The primary function of Shell is to accept Commands from user and then execute them.
+
+What is Bash ?
+Bash is type of Scripting language that helpw us to interact with a Linux Shell.
+ Bash stands for Bourse Again Shell.
+ Using Bash, we can write linux Command in CLI software like item, and terminal, and also write end to end programed Scripts which can help us to automate a lot of things in our computer.
+
+
+what is Bash Scripting ?
+we can say that at some point of time, we might have to execute multiple bash commands for achieving a complete task. For example: We want to monitor that if the disk usage of our machine goes beyond 90%, we should be mailed for this incident. if we are implementing this problem using bash script then we might need a lot of lines to work together in a single logical piece, that's where script will help.
+
+Any bash Script that we prepare will be having an extension of .sh  .
+
+How To write a bash script ?
+We can make a new file with an extension of .sh to make a bash script file. Any commands that we were able to directly execute in the terminal can be added as a code in this file to eventually run it.
+
+...bash
+echo "Hello World"
+
+echo "This is the first Bash Program"
+
+echo "Here VS code issue resolved "
+
+...
+
+Let's say we save the above code in a new script1.sh file. Now to run this, we can use following commands:-
+1. sh Script1.sh
+2. ./Script1.sh
+3. bash Script1.sh
+with both of these commands we can actually run the bash script and see output on our screen.
+
+Now in your machine there can be more than one shell Scripting language available, like bash, zsh, etc. Sometimes the default Scripting language is not bash, so that we have to seperately mention bash filename to enable it to be run by bash script. Bash is an modification of the sh shell script.
+If we don't want to mention which Scripting language to use in order to run the file, and execute it to pick from the code we can use "Shebang".
+
+##SheBang in ShellScripting -> 
+SheBang looks like this: #! . This Shebang is added on the top of the script and then we can mention that path of the Scripting language we want to get executed by
+...bash
+
+#!/bin/bash
+echo "Hello World"
+
+echo "This is the first Bash Program"
+
+echo "Ending"
+...
+
+Here we have added some bash code and at the top of the file added #!/bin/bash. So we passed the path of the interpreter which will be used to run the code, insted of picking the default one from system.
+
+Because we have mentioned the interpreter, we can run the file indepentely,
+./Script1.sh
+
+But this command will give you error. why? Because the current script file is not executable. When we say bash script1.sh then bash interpreter is directly executable in the terminal. To make our file directly executable we can change it's permission.
+ Command -> chmod +x script1.sh
+
+And now, we can run the script indepentely.
+./script1.sh
+
+This command will statr running the file, at the top because of Shebang pick the interpreter a bash and then run the remaining code with bash.
+
+
+Variables in Bash Script :
+Sometimes we want to reuse a value at multiple places in our bash script, to do that we can create Variables. Variables in bash script server the same purpose as Variable in any other language.
+To create a Variable, we just give VariableName put and equal to "=" sign and then give it a value.
+eg, a=90.
+
+This command creates a new Variable "a" with Now if we want to use this Variable at any place, we have to prepend a $ before the Variable name to access it's value.
+
+...bash
+
+echo "$a"
+
+...
+
+In this  statement, $a helps us to access a the value of the Variable "a".
+Now to add a Variable inside a bash script we can use the same syntax.
+
+...bash
+
+threshold=90 # declaring a variable threshold with value 80
+
+echo "value of the threshold set is $threshold" # using the variable inside a print statement
+
+echo 'value of threshol is $threshold'
+
+current_path=$(pwd)
+
+echo " current path is $current_path"
+
+echo "$not_presentVariable"
+
+echo $USER
+
+...
+
+The variable which we create in a terminal, or in script will exist only in teh same terminal session, once you close your terminal or move to a new terminal window, those variable won't be accessible.
+Apart from variables created by us, there are some predefined variables as well like $USER, $PAth etc. That are already present in every terminal session we create. These are predefined Linux variable and serve some specific purpose but if we want we can change their value.
+If we want to see all the inbuilt variables we use the command:
+
+...bash
+
+env
+
+...
+
+This will list all the existing predefined variables for us.
+
+
+SubShells :
+If we want to store the output of a linux command inside a variable we can do that using SubShell.
+
+...bash
+
+current_path=$(pwd) # $(commands)
+
+...
+
+This will store output of "pwd" current path.
