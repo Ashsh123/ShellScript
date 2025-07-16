@@ -136,3 +136,133 @@ current_path=$(pwd) # $(commands)
 ...
 
 This will store output of "pwd" current path.
+
+
+Interesting bash conditional script :- 
+...bash
+command="curl"
+
+if command -v $command &> /dev/null ; then
+echo "Curl command exixts"
+else
+echo "curl command doesn't exists"
+fi
+...
+
+Here the part 'command -v' is an actual valid linux bash command, which takes input of a command and tell the path from which command is executed, if it exists.
+For example, if 'curl' command is installed in your machine and we do 
+...bash
+command -v curl
+...
+Then it returns the path of curl command.
+Now we want to write a conditional that executes if a command runs successfully, then we can just put the command in the if consitional. If command executed successfully we get conditional 'true' else 'false'.
+but what about the output of hte command, we dont want output of the command to be printed, hance we dump the output of the given command in /dev/null 
+
+
+
+Evaluation meth expression :-
+If we want to evaluate math expression in shell, we can use the expr command and then arithmetic operation we can perform.
+
+expr 10 +2;
+expr / 2;
+expr 10 \* 2
+
+Here for multiplication we have to use '\' because '*' is considered for regex matching also in shell. 
+
+Conditionals and decisions in Bash Script :-
+Being a Programming language, Bash script is capable of using conditional statements for decision making process.
+
+In Bash, we have the 'if' keyword that can help use to put a conditional in place.
+
+if[condition];then
+   #some algorithm
+file
+
+
+   So, any 'if' block starts with the 'if' keyword and ends with 'fi' keyword and in between we put the condition and algorithm to execute when condition is true.
+
+For example :- 
+
+...bash
+
+c=30;
+if [ $c -ge 100 ]; then 
+	echo "This statement is True";
+else
+	echo "This is else statement";
+fi
+
+...
+
+Here in the conditionals square brackets we can use operators to prepare a condition which evaluates to a boolean true or false.
+If we want to put multiple conditions in place then we can also use 'elif'.
+
+...bash
+
+c=30;
+if [ $c -ge 100 ]; then 
+	echo "This statement is True";
+elif [ $c -le 30 ]; then 
+	echo "This is elif statement";
+else
+	echo "This is else statement";
+fi
+
+...
+
+
+Understanding Bash Operators :-
+
+This section provides an overview of operators used in Bash scripting, including comparison, string, arithmetic, logical, and file test operators.
+
+Comparison Operators :-
+
+-eq: Equal to
+-ne: Not equal to
+-lt: Less than
+-le: Less than or equal to
+-gt: Greater than
+-ge: Greater than or equal to
+
+
+String Comparison Operators :-
+
+'=' ->  Equal to                                    example :- [ "abc" = "abc" ] -> true
+
+'!=' ->  Not equal to                               example :- [ "abc" != "bbc" ] -> true
+
+'<' ->  Less than, in ASCII alphabetical order      example :- [ "abc" < "xyz" ] -> true
+
+'>' ->  Greater than, in ASCII alphabetical order   example :- [ "xyz" > "abc" ] -> true
+
+'-z' -> String is null (nero length)           example :- [ -z "" ] -> true
+
+'-n' -> String is not null                        example :- [ -n "abc" ] -> true
+
+
+Arithmetic Operators :-
+
++: Addition
+-: Subtraction
+*: Multiplication
+/: Division
+%: Modulus (remainder of division)
+
+
+For exponentiation, use external tools like bc or awk.
+Logical Operators :-
+
+&&: Logical AND
+||: Logical OR
+!: Logical NOT
+
+
+File Test Operators :-
+-e: Checks if a file exists
+-d: Checks if a directory exists
+-f: Checks if a file is a regular file
+-s: Checks if a file is not empty
+-r: File is readable
+-w: File is writeable
+-x: File is executable
+-L: File is symbolic link
