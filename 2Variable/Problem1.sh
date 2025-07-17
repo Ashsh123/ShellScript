@@ -24,5 +24,12 @@ echo "$directory_to_backup"    # value of the current date which will be appende
 
 tar -czf "$backup_location/backup-$current_date.tar.gz" "$directory_to_backup"   #Creating a backup
 
+status=$?
+
 echo "backup of $directory_to_backup completed successfully on $current_date inside $backup_location"
 
+if [ $status -eq 0 ]; then
+exit 0;
+else
+exit 1;
+fi

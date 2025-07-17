@@ -1,0 +1,245 @@
+
+# Data Streams :-
+
+Any text that we see as an output or pass as an input is classified into different stream of data.
+- Standard Input (stdin) -> Data stream where the input is recieved.
+- Standard Output (stdout) -> Data stream where command output is sent.
+- Standard Error (stdin) -> Data stream where any error is actually sent.
+
+We can control how the stdout and stderr be handled in our linux machine.
+
+If we want to stream out correct output i.e. stdout in a file by dumping it. we can use '>' or '1>'
+...bash
+ls -l 1> output.txt
+       or
+ls -l > output.txt
+...
+
+With both of the above codes, if our command runs properly then it will dump its log inside output.txt but if the commands fails, then the failure log or stderr will not be dumped in output.txt.
+
+To dump the data of error, we can use '2>'
+...bash
+ls -l notexist 2> error.txt
+...
+
+Here, if the command runs properly then the logs will not be dumped in error.txt, but if the command fails then all the error logs will be dumped.
+If we don't care and we want to dump everything i.e. stdout and stderr both then we can use '&>'
+...bash
+ls -l &> log.txt
+...
+
+Now, doesn't matter stdout and stderr. both will be dumped in log.txt .
+
+If we want to sepperately stream both stdout and stderr then we can combine the usage of '1>' and '2>'
+...bash
+bash test.sh 1> success.txt 2> error.txt
+...
+
+here all the stderr logs will be streamed to error.txt and stdout to success.txt .
+
+Now to handle taking input from user in bash, we can use 'stdin'. To trigger taking an input we have a command called as 'read'
+...bash
+#!/bin/bash
+
+#Taking input fro the user
+echo "Please enter a number"
+
+read num    #This will read an input fro user and store it in the num variable
+
+echo "Given input is $num"
+...
+
+Here, we first print Give Input, and then we will wait for the user to give an input, once the user gives an put then script resume and prints the second log with value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ pwd
+/d/documets/echo
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l
+total 24
+-rw-r--r-- 1 pc 197121  1099 Jul 17 11:35 backup-2025-07-17.tar.gz
+drwxr-xr-x 1 pc 197121     0 Jul 16 11:09 BashProgram/
+drwxr-xr-x 1 pc 197121     0 Jul 17 13:30 ConditionalStatements/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder1/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder2/
+-rw-r--r-- 1 pc 197121 10122 Jul 17 02:18 ShellScripting.txt
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:51 Variable/
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l doesnotexist
+ls: cannot access 'doesnotexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l bashprogram
+total 3
+-rw-r--r-- 1 pc 197121  94 Jul 16 02:09 Script1.sh
+-rwxr-xr-x 1 pc 197121 105 Jul 16 11:09 Script2.sh*
+-rw-r--r-- 1 pc 197121 334 Jul 16 10:55 Script3.sh
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l doesnotexist > error.txt
+ls: cannot access 'doesnotexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls
+backup-2025-07-17.tar.gz  error.txt  ShellScripting.txt
+BashProgram/              folder1/   Variable/
+ConditionalStatements/    folder2/
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat error.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l > output.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat output.txt
+total 24
+-rw-r--r-- 1 pc 197121  1099 Jul 17 11:35 backup-2025-07-17.tar.gz        
+drwxr-xr-x 1 pc 197121     0 Jul 16 11:09 BashProgram/
+drwxr-xr-x 1 pc 197121     0 Jul 17 13:30 ConditionalStatements/
+-rw-r--r-- 1 pc 197121     0 Jul 18 01:03 error.txt
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder1/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder2/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder1/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder2/
+-rw-r--r-- 1 pc 197121     0 Jul 18 01:04 output.txt
+-rw-r--r-- 1 pc 197121 10122 Jul 17 02:18 ShellScripting.txt
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:51 Variable/
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist 1> output.txt
+ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat output.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist 2> error.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat error.txt
+ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist 1> output.txt
+ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist 2> output.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat output.txt
+ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist &> error.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat error.txt
+My name is anthany gosh swami or me duniya me akela rehta hu . But bhai tu ye sb chod pdai pr dhyan de or apna error sambhal -> ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l notexist &> log.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat log.txt
+ls: cannot access 'notexist': No such file or directory
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ ls -l &> log.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cat log.txt
+total 25
+-rw-r--r-- 1 pc 197121  1099 Jul 17 11:35 backup-2025-07-17.tar.gz        
+drwxr-xr-x 1 pc 197121     0 Jul 16 11:09 BashProgram/
+drwxr-xr-x 1 pc 197121     0 Jul 17 13:30 ConditionalStatements/
+-rw-r--r-- 1 pc 197121   187 Jul 18 01:17 error.txt
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder1/
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:22 folder2/
+-rw-r--r-- 1 pc 197121     0 Jul 18 01:18 log.txt
+-rw-r--r-- 1 pc 197121     0 Jul 18 01:11 output.txt
+-rw-r--r-- 1 pc 197121 10122 Jul 17 02:18 ShellScripting.txt
+drwxr-xr-x 1 pc 197121     0 Jul 17 11:51 Variable/
+
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo (main)
+$ cd variable
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/variable (main)
+$ bash test.sh 1> success.txt 2> error.txt
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/variable (main)
+$ ls
+error.txt  Problem1.sh  success.txt  test.sh  Variable.sh*
+
+tar: Removing leading `/' from member names
+
+tar: Removing leading `/' from member names       
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/variable (main)
+$ cat success.txt
+/d/documets/echo/Variable
+backup of /d/documets/echo/Variable completed successfully on 2025-07-18 inside /d/documets/echo    
+Backup is Successfull
+*/
+
+/*
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash script.sh
+Please enter a number
+45
+Given input is 45
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ vim Function.sh
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash function.sh
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ vim function.sh
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash function.sh
+The square of 4 is 16
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash function.sh
+Square root of R1 is  and R2 is .
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash function.sh
+Square root of R1 is 16 and R2 is 36.
+
+pc@DESKTOP-0H2R059 MINGW64 /d/documets/echo/5DataStream (main)
+$ bash function.sh
+Square root of R1 is 16
+*/
